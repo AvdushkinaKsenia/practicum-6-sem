@@ -2,32 +2,29 @@ package ru.omstu.lab2;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.InputStream;
 
 public class JsonDataReader implements DataReader {
 
-    private final ObjectMapper mapper = new ObjectMapper();
-
-    @Override
     public String readField(String filePath, String fieldPath) throws Exception {
 
+        ObjectMapper mapper = new ObjectMapper();
         InputStream is = getClass().getClassLoader().getResourceAsStream(filePath);
-        JsonNode currentNode = mapper.readTree(is);
-
+        JsonNode node = mapper.readTree(is);
         String[] parts = fieldPath.split("/");
 
         for (String part : parts) {
-            if (part.isEmpty()) continue;
-
-            if (part.startsWith("[") && part.endsWith("]")) {
-                int index = Integer.parseInt(part.substring(1, part.length() - 1));
-                currentNode = currentNode.get(index);
+            if (part.isEmpty()) {
+                continue;
+            }
+            if (part.startsWith("[")) {
+                int index = Integer.parseInt(part.replace("[", "").replace("]", ""));
+                node = node.get(index);
             } else {
-                currentNode = currentNode.get(part);
+                node = node.get(part);
             }
         }
 
-        return currentNode.asText();
+        return node.asText();
     }
 }
