@@ -2,8 +2,9 @@ package ru.omstu.lab2;
 
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
-
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XmlDataReader implements DataReader {
 
@@ -19,17 +20,34 @@ public class XmlDataReader implements DataReader {
         Node currentNode = document.getDocumentElement();
         String[] parts = fieldPath.split("/");
 
-        for (String part : parts) {
+        for (int i = 0; i < parts.length; i++) {
+
+            String part = parts[i];
             if (part.isEmpty()) continue;
 
-            if (part.startsWith("[") && part.endsWith("]")) {
-                int index = Integer.parseInt(part.substring(1, part.length() - 1));
-                currentNode = currentNode.getChildNodes().item(index);
+            if (i + 1 < parts.length && parts[i + 1].startsWith("[")) {
+
+                int index = Integer.parseInt(parts[i + 1]
+                        .substring(1, parts[i + 1].length() - 1));
+
+                NodeList list = document.getElementsByTagName(part);
+
+                currentNode = list.item(index);
+
+                i++;
+
             } else {
+
                 NodeList children = currentNode.getChildNodes();
-                for (int i = 0; i < children.getLength(); i++) {
-                    if (children.item(i).getNodeName().equals(part)) {
-                        currentNode = children.item(i);
+
+                for (int j = 0; j < children.getLength(); j++) {
+
+                    Node child = children.item(j);
+
+                    if (child.getNodeType() == Node.ELEMENT_NODE &&
+                            child.getNodeName().equals(part)) {
+
+                        currentNode = child;
                         break;
                     }
                 }
