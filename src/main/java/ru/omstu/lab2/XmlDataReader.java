@@ -3,8 +3,6 @@ package ru.omstu.lab2;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class XmlDataReader implements DataReader {
 
