@@ -1,6 +1,7 @@
 package ru.omstu.fitprogwork.dto;
 
 public class RequestDto {
+
     private String type;
     private String data;
     private String path;
@@ -12,4 +13,9 @@ public class RequestDto {
     public void setType(String type) { this.type = type; }
     public void setData(String data) { this.data = data; }
     public void setPath(String path) { this.path = path; }
+
+    @Override
+    public String toString() {
+        return type + "|" + data + "|" + path;
+    }
 }
