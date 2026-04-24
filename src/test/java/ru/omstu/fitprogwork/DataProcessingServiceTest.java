@@ -29,6 +29,32 @@ public class DataProcessingServiceTest {
     }
 
     @Test
+    void testXmlProcessing() throws Exception {
+
+        RequestDto request = new RequestDto();
+        request.setType("xml");
+        request.setData("<user><name>Alex</name></user>");
+        request.setPath("name");
+
+        String result = service.process(request);
+
+        assertEquals("Alex", result);
+    }
+
+    @Test
+    void testYamlProcessing() throws Exception {
+
+        RequestDto request = new RequestDto();
+        request.setType("yaml");
+        request.setData("user:\n  name: Alex");
+        request.setPath("user/name");
+
+        String result = service.process(request);
+
+        assertEquals("Alex", result);
+    }
+
+    @Test
     void testCacheWorks() throws Exception {
 
         RequestDto request = new RequestDto();
