@@ -9,10 +9,9 @@ import java.util.Map;
 public class DataProcessingService {
 
     private final Map<String, DataExtractorService> services;
-    private final CacheService cacheService;
+    private final ICacheService cacheService;
 
-    public DataProcessingService(Map<String, DataExtractorService> services,
-                                 CacheService cacheService) {
+    public DataProcessingService(Map<String, DataExtractorService> services, ICacheService cacheService) {
         this.services = services;
         this.cacheService = cacheService;
     }
@@ -26,8 +25,8 @@ public class DataProcessingService {
         if (cached != null) {
             return cached;
         }
-        DataExtractorService service = services.get(request.getType());
 
+        DataExtractorService service = services.get(request.getType());
         if (service == null) {
             throw new RuntimeException("Unknown type: " + request.getType());
         }
