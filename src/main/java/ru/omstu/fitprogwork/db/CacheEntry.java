@@ -41,11 +41,11 @@ public class CacheEntry {
     public Long getId()                    { return id; }
 
     public String getCacheKey()            { return cacheKey; }
-    public void   setCacheKey(String k)    { this.cacheKey = k; }
+    public void setCacheKey(String k)    { this.cacheKey = k; }
 
     public String getCacheValue()          { return cacheValue; }
-    public void   setCacheValue(String v)  { this.cacheValue = v; }
+    public void setCacheValue(String v)  { this.cacheValue = v; }
 
     public LocalDateTime getCreatedAt()           { return createdAt; }
-    public void          setCreatedAt(LocalDateTime t) { this.createdAt = t; }
+    public void setCreatedAt(LocalDateTime t) { this.createdAt = t; }
 }

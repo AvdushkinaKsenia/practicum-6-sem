@@ -40,7 +40,6 @@ public class DbCacheService implements ICacheService {
         if (existing.isPresent()) {
             CacheEntry entry = existing.get();
             entry.setCacheValue(value);
-            // createdAt не обновляем: запись обновлена, но не пересоздана
             repository.save(entry);
         } else {
             repository.save(new CacheEntry(key, value));

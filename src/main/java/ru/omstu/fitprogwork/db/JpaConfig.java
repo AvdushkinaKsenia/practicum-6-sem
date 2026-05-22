@@ -38,7 +38,7 @@ public class JpaConfig {
 
         EclipseLinkJpaVendorAdapter jpaVendorAdapter = new EclipseLinkJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.HSQL);
-        jpaVendorAdapter.setGenerateDdl(true);   // автоматически создаёт таблицы по @Entity
+        jpaVendorAdapter.setGenerateDdl(true);
         jpaVendorAdapter.setShowSql(true);
 
         Map<String, Object> props = new HashMap<>();
@@ -47,7 +47,7 @@ public class JpaConfig {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(dataSource);
         emf.setJpaVendorAdapter(jpaVendorAdapter);
-        emf.setPackagesToScan("ru.omstu.fitprogwork.db");   // сканируем @Entity в этом пакете
+        emf.setPackagesToScan("ru.omstu.fitprogwork.db");
         emf.setJpaPropertyMap(props);
         return emf;
     }
