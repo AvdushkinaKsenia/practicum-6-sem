@@ -8,18 +8,14 @@ import java.time.LocalDateTime;
 public class CacheEntry {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // Ключ кеша — строковое представление запроса (тип|данные|путь)
-    @Column(name = "CACHE_KEY", unique = true, nullable = false, length = 2000)
+    @Column(name = "CACHE_KEY", unique = true, nullable = false, length = 10000)
     private String cacheKey;
 
     // Закешированный результат
     @Column(name = "CACHE_VALUE", nullable = false, length = 10000)
     private String cacheValue;
 
-    // Время создания записи. Устанавливается автоматически.
+    // Время создания записи. Устанавливается автоматически
     @Column(name = "CREATED_AT", nullable = false)
     private LocalDateTime createdAt;
 
@@ -38,8 +34,6 @@ public class CacheEntry {
     }
 
     // Геттеры / Сеттеры
-    public Long getId()                    { return id; }
-
     public String getCacheKey()            { return cacheKey; }
     public void setCacheKey(String k)    { this.cacheKey = k; }
 

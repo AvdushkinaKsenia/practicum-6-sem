@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public interface CacheEntryRepository extends JpaRepository<CacheEntry, Long> {
+public interface CacheEntryRepository extends JpaRepository<CacheEntry, String> {
 
     // Найти запись по ключу
     Optional<CacheEntry> findByCacheKey(String cacheKey);

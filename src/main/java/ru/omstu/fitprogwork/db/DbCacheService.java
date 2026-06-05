@@ -23,7 +23,7 @@ public class DbCacheService implements ICacheService {
     @Override
     @Transactional(readOnly = true)
     public String get(String key) {
-        Optional<CacheEntry> entry = repository.findByCacheKey(key);
+        Optional<CacheEntry> entry = repository.findById(key);
         if (entry.isPresent()) {
             System.out.println("CACHE HIT (DB): " + key);
             return entry.get().getCacheValue();
@@ -36,7 +36,7 @@ public class DbCacheService implements ICacheService {
     public void put(String key, String value) {
         System.out.println("CACHE PUT (DB): " + key);
         // Если запись уже есть — обновляем значение, иначе создаём новую
-        Optional<CacheEntry> existing = repository.findByCacheKey(key);
+        Optional<CacheEntry> existing = repository.findById(key);
         if (existing.isPresent()) {
             CacheEntry entry = existing.get();
             entry.setCacheValue(value);
